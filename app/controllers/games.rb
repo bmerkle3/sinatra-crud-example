@@ -20,8 +20,6 @@ post '/games' do
   if @game.save
     current_user.games << @game
     redirect '/games'
-  else
-    erb :"games/new"
   end
 end
 
@@ -45,9 +43,8 @@ put '/games/:id' do
 
   if @game.update_attributes(params[:game])
     redirect '/games'
-  else
-    erb :"games/edit"
   end
+
 end
 
 delete '/games/:id' do

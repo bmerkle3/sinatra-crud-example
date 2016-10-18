@@ -8,8 +8,6 @@ post '/users' do
 
   if @user.save
     redirect '/'
-  else
-    erb :"users/new"
   end
 end
 
