@@ -7,7 +7,7 @@ post '/login' do
 
   if @user && @user.authenticate(params[:password])
     session[:user_id] = @user.id
-    redirect '/'
+    redirect "/users/#{@user.id}"
   else
     @message = "Either you username or password was wrong"
     erb :"session/new"
