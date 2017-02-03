@@ -2,8 +2,7 @@
 
 <ul>
 <% @games.each do |game| %>
-  <li><a href="/games/<%= game.id %>"><%= game.name %></a></li>
+<%= erb :"games/_game", locals: {game: game}%>
 <% end %>
 </ul>
-
-<a href="/games/new">Create Game</a>
+<a id="create-game-link" href="/games/new">Create Game</a>

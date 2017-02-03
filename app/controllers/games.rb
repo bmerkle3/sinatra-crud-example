@@ -5,16 +5,30 @@ end
 
 get '/games/new' do
   @game = Game.new
-  erb :"games/new"
+
+  if request.xhr?
+    erb :"/games/_form", layout: false
+  else
+    erb :"games/new"
+  end
 end
 
 post '/games' do
   @game = Game.new(params[:game])
 
-  if @game.save
-    redirect '/games'
+  if request.xhr?
+    if @game.save
+      erb :"games/_game", layout: false, locals: {game: @game}
+    else
+      status 422
+      body @game.errors.full_messages
+    end
   else
-    erb :"games/new"
+    if @game.save
+      redirect "/games/#{@game.id}"
+    else
+      erb :"games/new"
+    end
   end
 end
 
